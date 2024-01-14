@@ -11,14 +11,20 @@ const serve = require("koa-static");
 const bodyParser = require('koa-bodyparser');
 app.use(bodyParser());
 
+
 //路由配置
 // const routes = ['user','exam'];
+const routes=['teacher']
 // routes.forEach((route) => {
 // 	app.use(require(`./routes/${route}`).routes());
 // });
-
-app.use(async ctx => {
-  ctx.body = 'Hello World';
+routes.forEach((route) => {
+	app.use(async (ctx, next)=> {
+		ctx.set('Access-Control-Allow-Origin', '*');
+		ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+		ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+		require(`./routes/${route}`).routes();
+	});	
 });
 
 app.listen(3000,function(){
