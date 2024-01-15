@@ -5,7 +5,10 @@ var rourter = new Router({
 
 const teacher = require('../controller/teacher');
 
-rourter.post('/addQuesion/singleChoice',teacher.addSingleChoiceQuestion);
+rourter.post('/addQuestion/singleChoice',teacher.addSingleChoiceQuestion);
+rourter.get('/questionList/singleChoice',teacher.singleChoiceList);
+rourter.post('/deleteQuestion/singleChoice',teacher.deleteSingleChoice)
+
 
 
 module.exports = rourter;
