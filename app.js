@@ -2,6 +2,7 @@ const Koa = require('koa');
 const app = new Koa();
 const path = require('path');
 const serve = require("koa-static");
+const cors = require('koa2-cors')
 
 //静态资源托管
 // app.use(serve(path.join(__dirname+"/static")));
@@ -11,20 +12,22 @@ const serve = require("koa-static");
 const bodyParser = require('koa-bodyparser');
 app.use(bodyParser());
 
-
+app.use(
+	cors({
+	   origin: ['*'],
+	   methods: ['GET','POST','PUT','DELETE'],
+	   allowedHeaders: ['Contetn-Type','Authorization']
+	})
+)
 //路由配置
 // const routes = ['user','exam'];
 const routes=['teacher']
 // routes.forEach((route) => {
 // 	app.use(require(`./routes/${route}`).routes());
 // });
+
 routes.forEach((route) => {
-	app.use(async (ctx, next)=> {
-		ctx.set('Access-Control-Allow-Origin', '*');
-		ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-		ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 		require(`./routes/${route}`).routes();
-	});	
 });
 
 app.listen(3000,function(){
