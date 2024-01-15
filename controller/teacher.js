@@ -7,11 +7,10 @@ exports.addSingleChoiceQuestion = async function(ctx, next){
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const results = await query(
-			`INSERT INTO single_choice VALUES ('${data.questionId}', '${data.stem}', '${data.selectA}', '${data.selectB}', '${data.selectC}','${data.selectD}');`
-		);
+		const sql_query = `INSERT INTO single_choice (stem,selectA,selectB,selectC,selectD) VALUES ('${data.stem}', '${data.selectA}', '${data.selectB}', '${data.selectC}','${data.selectD}');`
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
 		console.log("----results",results)
-
 		connection.end();
   }catch(e){
     console.log('addquestion error', e.message, e.stack);
@@ -21,3 +20,4 @@ exports.addSingleChoiceQuestion = async function(ctx, next){
 		};
   }
 };
+
