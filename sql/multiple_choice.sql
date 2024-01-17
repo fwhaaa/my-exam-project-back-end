@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS ` multiple_choice`;
+DROP TABLE IF EXISTS `multiple_choice`;
 CREATE TABLE ` multiple_choice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stem` varchar(255) DEFAULT NULL,
