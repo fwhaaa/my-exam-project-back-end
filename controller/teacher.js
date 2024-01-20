@@ -99,16 +99,6 @@ exports.editStudent = async function(ctx, next){
 };
 
 
-
-
-
-
-
-
-
-
-
-
 exports.addTeacher= async function(ctx, next){
 	try {
     const data = ctx.request.body;
@@ -204,19 +194,6 @@ exports.editTeacher = async function(ctx, next){
 		};
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 exports.addSingleChoiceQuestion = async function(ctx, next){
 	try {
@@ -314,25 +291,6 @@ exports.editSingleChoice = async function(ctx, next){
 		};
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 exports.addMultipleChoiceQuestion = async function(ctx, next){
 	try {

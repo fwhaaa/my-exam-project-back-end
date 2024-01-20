@@ -16,7 +16,7 @@ app.use(
 )
 //路由配置
 // const routes = ['user','exam'];
-const routes=['teacher']
+const routes=['teacher','paper']
 routes.forEach((route) => {
 	app.use(require(`./routes/${route}`).routes());
 });

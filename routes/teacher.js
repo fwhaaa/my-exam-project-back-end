@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 var rourter = new Router({
-    prefix:'/api/teacher'
+    prefix:'/api/teacher',
 });
 
 const teacher = require('../controller/teacher');
