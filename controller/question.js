@@ -2,110 +2,14 @@ const bluebird = require('bluebird');//promise化
 const connectionModel = require('../models/connection');
 	
 
-exports.addStudent= async function(ctx, next){
+
+exports.addSingleChoiceQuestion = async function(ctx, next){
 	try {
     const data = ctx.request.body;
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `INSERT INTO student (studentname,address,email) VALUES ('${data.studentname}', '${data.address}', '${data.email}');`
-		console.log('sqlquery',sql_query);
-		const results = await query(sql_query);
-		ctx.body = {
-			respCode: 1,
-			results
-		};
-		console.log("----results",results)
-		connection.end();
-  }catch(e){
-    console.log('addstudent error', e.message, e.stack);
-    ctx.body = {
-			respCode: e.code || -1,
-			respMsg: e.message
-		};
-  }
-};
-
-exports.studentList = async function(ctx, next){
-	try {
-    const data = ctx.request.body;
-        console.log("----data",data)
-		const connection = connectionModel.getConnection();
-		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `SELECT * FROM student;`
-		console.log('sqlquery',sql_query);
-		const results = await query(sql_query);
-		ctx.body = {
-			respCode: 1,
-			results
-		};
-		console.log("----results",results)
-		connection.end();
-  }catch(e){
-    console.log('studentList error', e.message, e.stack);
-    ctx.body = {
-			respCode: e.code || -1,
-			respMsg: e.message
-		};
-  }
-};
-
-exports.deleteStudent = async function(ctx, next){
-	try {
-    const data = ctx.request.body;
-        console.log("----data",data)
-		const connection = connectionModel.getConnection();
-		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `DELETE  FROM student WHERE id = '${data.id}';`
-		console.log('sqlquery',sql_query);
-		const results = await query(sql_query);
-		ctx.body = {
-			respCode: 1,
-			results
-		};
-		console.log("----results",results)
-		connection.end();
-  }catch(e){
-    console.log('deleteStudent error', e.message, e.stack);
-    ctx.body = {
-			respCode: e.code || -1,
-			respMsg: e.message
-		};
-  }
-};
-
-exports.editStudent = async function(ctx, next){
-	try {
-    const data = ctx.request.body;
-        console.log("----data",data)
-		const connection = connectionModel.getConnection();
-		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `UPDATE student SET studentname = '${data.studentname}',address = '${data.address}',email = '${data.email}' WHERE id = '${data.id}'; `
-		console.log('sqlquery',sql_query);
-		const results = await query(sql_query);
-		ctx.body = {
-			respCode: 1,
-			results
-		};
-		console.log("----results",results)
-		connection.end();
-  }catch(e){
-    console.log('editStudent error', e.message, e.stack);
-    ctx.body = {
-			respCode: e.code || -1,
-			respMsg: e.message
-		};
-  }
-};
-
-
-exports.addTeacher= async function(ctx, next){
-	try {
-    const data = ctx.request.body;
-        console.log("----data",data)
-		const connection = connectionModel.getConnection();
-		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `INSERT INTO teacher (teachername,address,email) VALUES ('${data.teachername}', '${data.address}', '${data.email}');`
+		const sql_query = `INSERT INTO single_choice (stem,subject,selectA,selectB,selectC,selectD) VALUES ('${data.stem}', '${data.subject}','${data.selectA}', '${data.selectB}', '${data.selectC}','${data.selectD}');`
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
@@ -123,13 +27,17 @@ exports.addTeacher= async function(ctx, next){
   }
 };
 
-exports.teacherList = async function(ctx, next){
+	
+exports.singleChoiceList = async function(ctx, next){
 	try {
     const data = ctx.request.body;
+	const urlquery = ctx.request.query;
         console.log("----data",data)
+		console.log("----query",urlquery)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `SELECT * FROM teacher;`
+		
+		const sql_query = urlquery.subject ? `SELECT * FROM single_choice where subject = '${urlquery.subject}'; ` : `SELECT * FROM single_choice;`  
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
@@ -139,7 +47,7 @@ exports.teacherList = async function(ctx, next){
 		console.log("----results",results)
 		connection.end();
   }catch(e){
-    console.log('teacherList error', e.message, e.stack);
+    console.log('singleChoiceList error', e.message, e.stack);
     ctx.body = {
 			respCode: e.code || -1,
 			respMsg: e.message
@@ -147,13 +55,13 @@ exports.teacherList = async function(ctx, next){
   }
 };
 
-exports.deleteTeacher = async function(ctx, next){
+exports.deleteSingleChoice = async function(ctx, next){
 	try {
     const data = ctx.request.body;
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `DELETE  FROM teacher WHERE id = '${data.id}';`
+		const sql_query = `DELETE  FROM single_choice WHERE id = '${data.id}';`
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
@@ -163,7 +71,7 @@ exports.deleteTeacher = async function(ctx, next){
 		console.log("----results",results)
 		connection.end();
   }catch(e){
-    console.log('deleteTeacher error', e.message, e.stack);
+    console.log('singleChoiceList error', e.message, e.stack);
     ctx.body = {
 			respCode: e.code || -1,
 			respMsg: e.message
@@ -171,13 +79,14 @@ exports.deleteTeacher = async function(ctx, next){
   }
 };
 
-exports.editTeacher = async function(ctx, next){
+exports.editSingleChoice = async function(ctx, next){
 	try {
     const data = ctx.request.body;
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
+
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `UPDATE teacher SET teachername = '${data.teachername}',address = '${data.address}',email = '${data.email}' WHERE id = '${data.id}'; `
+		const sql_query = `UPDATE single_choice SET selectA = '${data.selectA}',selectB = '${data.selectB}',selectC = '${data.selectC}',selectD = '${data.selectD}' WHERE stem = '${data.stem}'; `
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
@@ -187,7 +96,7 @@ exports.editTeacher = async function(ctx, next){
 		console.log("----results",results)
 		connection.end();
   }catch(e){
-    console.log('editTeacher error', e.message, e.stack);
+    console.log('singleChoiceList error', e.message, e.stack);
     ctx.body = {
 			respCode: e.code || -1,
 			respMsg: e.message
@@ -195,3 +104,101 @@ exports.editTeacher = async function(ctx, next){
   }
 };
 
+exports.addMultipleChoiceQuestion = async function(ctx, next){
+	try {
+    const data = ctx.request.body;
+        console.log("----data",data)
+		const connection = connectionModel.getConnection();
+		const query = bluebird.promisify(connection.query.bind(connection));
+		const sql_query =  `INSERT INTO multiple_choice (stem,subject,selectA,selectB,selectC,selectD) VALUES ('${data.stem}', '${data.subject}','${data.selectA}', '${data.selectB}', '${data.selectC}','${data.selectD}');`
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
+		ctx.body = {
+			respCode: 1,
+			results
+		};
+		console.log("----results",results)
+		connection.end();
+  }catch(e){
+    console.log('addquestion error', e.message, e.stack);
+    ctx.body = {
+			respCode: e.code || -1,
+			respMsg: e.message
+		};
+  }
+};
+
+	
+exports.multipleChoiceList = async function(ctx, next){
+	try {
+    const data = ctx.request.body;
+        console.log("----data",data)
+		const connection = connectionModel.getConnection();
+		const query = bluebird.promisify(connection.query.bind(connection));
+		const urlquery = ctx.request.query;
+		const sql_query = urlquery.subject ? `SELECT * FROM multiple_choice where subject = '${urlquery.subject}'; ` : `SELECT * FROM multiple_choice;`  
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
+		ctx.body = {
+			respCode: 1,
+			results
+		};
+		console.log("----results",results)
+		connection.end();
+  }catch(e){
+    console.log('multiplehoiceList error', e.message, e.stack);
+    ctx.body = {
+			respCode: e.code || -1,
+			respMsg: e.message
+		};
+  }
+};
+
+exports.deleteMultipleChoice = async function(ctx, next){
+	try {
+    const data = ctx.request.body;
+        console.log("----data",data)
+		const connection = connectionModel.getConnection();
+		const query = bluebird.promisify(connection.query.bind(connection));
+		const sql_query = `DELETE  FROM multiple_choice WHERE id = '${data.id}';`
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
+		ctx.body = {
+			respCode: 1,
+			results
+		};
+		console.log("----results",results)
+		connection.end();
+  }catch(e){
+    console.log('multipleChoiceList error', e.message, e.stack);
+    ctx.body = {
+			respCode: e.code || -1,
+			respMsg: e.message
+		};
+  }
+};
+
+
+exports.editMultipleChoice = async function(ctx, next){
+	try {
+    const data = ctx.request.body;
+        console.log("----data",data)
+		const connection = connectionModel.getConnection();
+		const query = bluebird.promisify(connection.query.bind(connection));
+		const sql_query = `UPDATE multiple_choice SET selectA = '${data.selectA}',selectB = '${data.selectB}',selectC = '${data.selectC}',selectD = '${data.selectD}' WHERE stem = '${data.id}'; `
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
+		ctx.body = {
+			respCode: 1,
+			results
+		};
+		console.log("----results",results)
+		connection.end();
+  }catch(e){
+    console.log('multipleChoiceList error', e.message, e.stack);
+    ctx.body = {
+			respCode: e.code || -1,
+			respMsg: e.message
+		};
+  }
+};
