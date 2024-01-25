@@ -4,13 +4,13 @@ var rourter = new Router({
 });
 
 
-const paper = require('../controller/exam');
+const exam = require('../controller/exam');
 
 rourter.post('/examManagement/add',exam.addExam);
-rourter.get('/examManagement/list',exam.examList);
-rourter.get('/examManagement/paper',exam.paperList);
-rourter.post('/examManagement/delete',paper.deleteExam)
-rourter.post('/examManagement/edit',paper.editExam);
+// rourter.get('/examManagement/list',exam.examList);
+rourter.get('/examManagement/paper',exam.paper);
+// rourter.post('/examManagement/delete',exam.deleteExam)
+// rourter.post('/examManagement/edit',exam.editExam);
 
 
 
