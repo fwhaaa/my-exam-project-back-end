@@ -7,10 +7,10 @@ var rourter = new Router({
 const exam = require('../controller/exam');
 
 rourter.post('/examManagement/add',exam.addExam);
-// rourter.get('/examManagement/list',exam.examList);
+rourter.get('/examManagement/list',exam.examList);
 rourter.get('/examManagement/paper',exam.paper);
-// rourter.post('/examManagement/delete',exam.deleteExam)
-// rourter.post('/examManagement/edit',exam.editExam);
+rourter.post('/examManagement/delete',exam.deleteExam)
+rourter.post('/examManagement/edit',exam.editExam);
 
 
 
