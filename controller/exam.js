@@ -57,7 +57,8 @@ exports.examList = async function(ctx, next){
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `SELECT * FROM exam;`
+		const urlquery = ctx.request.query;
+		const sql_query = urlquery.subject ? `SELECT * FROM exam where subject = '${urlquery.subject}'; ` : `SELECT * FROM exam;`
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
