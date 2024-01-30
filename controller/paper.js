@@ -31,7 +31,8 @@ exports.paperList = async function(ctx, next){
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `SELECT * FROM paper;`
+		const urlquery = ctx.request.query;
+		const sql_query = urlquery.id ? `SELECT * FROM paper where id = '${urlquery.id}'; ` : `SELECT * FROM paper;`
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
