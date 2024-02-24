@@ -6,6 +6,6 @@ var rourter = new Router({
 const pending_approval = require('../controller/pending_approval');
 
 rourter.post('/add/exam', pending_approval.add);
-
+rourter.get('/list/paper', pending_approval.list);
 
 module.exports = rourter;
