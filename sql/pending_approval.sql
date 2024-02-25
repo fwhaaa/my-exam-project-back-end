@@ -5,6 +5,7 @@
     `paperId` varchar(255) NOT NULL,
     `studentId` varchar(255) NOT NULL,
     `answer` longtext DEFAULT NULL,
+    `score` number DEFAULT NULL,
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
