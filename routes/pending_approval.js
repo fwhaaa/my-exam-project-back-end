@@ -1,12 +1,12 @@
 const Router = require('koa-router');
-var rourter = new Router({
+var router = new Router({
     prefix:'/api/pending_approval',
 });
 
 const pending_approval = require('../controller/pending_approval');
 
-rourter.post('/add/exam', pending_approval.add);
-rourter.get('/list/paper', pending_approval.list);
-rourter.post('/add/score', pending_approval.score);
+router.post('/add/exam', pending_approval.add);
+router.get('/list/paper', pending_approval.list);
+router.post('/add/score', pending_approval.score);
 
-module.exports = rourter;
+module.exports = router;

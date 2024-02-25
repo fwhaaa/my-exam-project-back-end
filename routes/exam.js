@@ -1,17 +1,17 @@
 const Router = require('koa-router');
-var rourter = new Router({
+var router = new Router({
     prefix:'/api/exam'
 });
 
 
 const exam = require('../controller/exam');
 
-rourter.post('/examManagement/add',exam.addExam);
-rourter.get('/examManagement/list',exam.examList);
-rourter.get('/examManagement/paper',exam.paper);
-rourter.post('/examManagement/delete',exam.deleteExam)
-rourter.post('/examManagement/edit',exam.editExam);
+router.post('/examManagement/add',exam.addExam);
+router.get('/examManagement/list',exam.examList);
+router.get('/examManagement/paper',exam.paper);
+router.post('/examManagement/delete',exam.deleteExam)
+router.post('/examManagement/edit',exam.editExam);
 
 
 
-module.exports = rourter;
+module.exports = router;

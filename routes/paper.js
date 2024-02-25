@@ -1,16 +1,16 @@
 const Router = require('koa-router');
-var rourter = new Router({
+var router = new Router({
     prefix:'/api/paper'
 });
 
 
 const paper = require('../controller/paper');
 
-rourter.post('/paperManagement/add',paper.addPaper);
-rourter.get('/paperManagement/list',paper.paperList);
-rourter.post('/paperManagement/delete',paper.deletePaper)
-rourter.post('/paperManagement/edit',paper.editPaper);
+router.post('/paperManagement/add',paper.addPaper);
+router.get('/paperManagement/list',paper.paperList);
+router.post('/paperManagement/delete',paper.deletePaper)
+router.post('/paperManagement/edit',paper.editPaper);
 
 
 
-module.exports = rourter;
+module.exports = router;

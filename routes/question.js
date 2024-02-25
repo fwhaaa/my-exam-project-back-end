@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-var rourter = new Router({
+var router = new Router({
     prefix:'/api/question',
 });
 
@@ -9,28 +9,28 @@ const question = require('../controller/question');
 
 
 
-rourter.post('/addQuestion/singleChoice', question.addSingleChoiceQuestion);
-rourter.get('/questionList/singleChoice', question.singleChoiceList);
-rourter.post('/deleteQuestion/singleChoice', question.deleteSingleChoice)
-rourter.post('/editQuestion/singleChoice', question.editSingleChoice)
+router.post('/addQuestion/singleChoice', question.addSingleChoiceQuestion);
+router.get('/questionList/singleChoice', question.singleChoiceList);
+router.post('/deleteQuestion/singleChoice', question.deleteSingleChoice)
+router.post('/editQuestion/singleChoice', question.editSingleChoice)
 
 
-rourter.post('/addQuestion/multipleChoice',question.addMultipleChoiceQuestion);
-rourter.get('/questionList/multipleChoice',question.multipleChoiceList);
-rourter.post('/deleteQuestion/multipleChoice',question.deleteMultipleChoice)
-rourter.post('/editQuestion/multipleChoice',question.editMultipleChoice)
+router.post('/addQuestion/multipleChoice',question.addMultipleChoiceQuestion);
+router.get('/questionList/multipleChoice',question.multipleChoiceList);
+router.post('/deleteQuestion/multipleChoice',question.deleteMultipleChoice)
+router.post('/editQuestion/multipleChoice',question.editMultipleChoice)
 
-rourter.post('/addQuestion/judge',question.addJudgeQuestion);
-rourter.get('/questionList/judge',question.judgeList);
-rourter.post('/deleteQuestion/judge',question.deleteJudge)
-rourter.post('/editQuestion/judge',question.editJudge)
+router.post('/addQuestion/judge',question.addJudgeQuestion);
+router.get('/questionList/judge',question.judgeList);
+router.post('/deleteQuestion/judge',question.deleteJudge)
+router.post('/editQuestion/judge',question.editJudge)
 
-rourter.post('/addQuestion/saq',question.addSaqQuestion);
-rourter.get('/questionList/saq',question.saqList);
-rourter.post('/deleteQuestion/saq',question.deleteSaq)
-rourter.post('/editQuestion/saq',question.editSaq)
-
-
+router.post('/addQuestion/saq',question.addSaqQuestion);
+router.get('/questionList/saq',question.saqList);
+router.post('/deleteQuestion/saq',question.deleteSaq)
+router.post('/editQuestion/saq',question.editSaq)
 
 
-module.exports = rourter;
+
+
+module.exports = router;
