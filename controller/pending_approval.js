@@ -58,7 +58,7 @@ exports.score= async function(ctx, next){
         console.log("----data",data)
 		const connection = connectionModel.getConnection();
 		const query = bluebird.promisify(connection.query.bind(connection));
-		const sql_query = `UPDATE pending_approval set score = '${data.totalScore}'  WHERE  examId = '${data.examId}' AND studentId = '${data.studentId}' ;`
+		const sql_query = `UPDATE pending_approval set score = '${data.point}'  WHERE  examId = '${data.examId}' AND studentId = '${data.studentId}' ;`
 		console.log('sqlquery',sql_query);
 		const results = await query(sql_query);
 		ctx.body = {
