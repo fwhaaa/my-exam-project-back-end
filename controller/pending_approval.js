@@ -75,3 +75,29 @@ exports.score= async function(ctx, next){
 		};
   }
 };
+
+exports.student = async function(ctx, next){
+	try {
+    const data = ctx.request.body;
+	    const urlquery = ctx.request.query;
+        console.log("----data",data)
+		console.log("----query",urlquery)
+		const connection = connectionModel.getConnection();
+		const query = bluebird.promisify(connection.query.bind(connection));
+		const sql_query =  `SELECT score FROM pending_approval WHERE examId = '${urlquery.examId}' AND studentId = '${urlquery.studentId }'; ` 
+		console.log('sqlquery',sql_query);
+		const results = await query(sql_query);
+		ctx.body = {
+			respCode: 1,
+			results
+		};
+		console.log("----results",results)
+		connection.end();
+  }catch(e){
+    console.log('List error', e.message, e.stack);
+    ctx.body = {
+			respCode: e.code || -1,
+			respMsg: e.message
+		};
+  }
+};
